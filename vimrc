@@ -20,6 +20,7 @@ Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
 Plugin 'tpope/vim-endwise' " adding end after if, do, def and several other keywords
 Plugin 'scrooloose/syntastic' "syntax checker, opts below
 Plugin 'ngmy/vim-rubocop' "Adds a :RuboCop command, which accept rubocop cli args
+Plugin 'rizzatti/dash.vim' " will search for terms using Dash leader+D
 
 Plugin 'scrooloose/nerdtree' " tree explorer plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin' " plugin of NERDTree showing git status flags
@@ -203,6 +204,9 @@ map <C-h> <C-w><Left>
 " Toggle paste mode
 nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
 imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
+
+" Dash integration
+nmap <silent> <leader>d <Plug>DashSearch
 
 " format the entire file
 nnoremap <leader>fef :normal! gg=G``<CR>
