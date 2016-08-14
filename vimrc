@@ -10,7 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'flazz/vim-colorschemes'
 Plugin 'mhinz/vim-startify' " adds start screen with cow
 Plugin 'airblade/vim-gitgutter' "shows a git diff in the gutter (sign column)
-Plugin 'morhetz/gruvbox' "groove color scheme
+"Plugin 'morhetz/gruvbox' "groove color scheme
 Plugin 'bling/vim-airline' "lean & mean status/tabline for vim that's light as air.
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jgdavey/vim-railscasts' "code highlight theme
@@ -21,6 +21,7 @@ Plugin 'tpope/vim-endwise' " adding end after if, do, def and several other keyw
 Plugin 'scrooloose/syntastic' "syntax checker, opts below
 Plugin 'ngmy/vim-rubocop' "Adds a :RuboCop command, which accept rubocop cli args
 Plugin 'rizzatti/dash.vim' " will search for terms using Dash leader+D
+Plugin 'danchoi/ri.vim' " ruby doc
 
 Plugin 'scrooloose/nerdtree' " tree explorer plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin' " plugin of NERDTree showing git status flags
@@ -65,6 +66,9 @@ augroup lexical
   autocmd FileType textile call lexical#init()
   autocmd FileType text call lexical#init({ 'spell': 0 })
 augroup END
+
+" Only for ruby files, for example
+autocmd BufWritePre *.rb :normal gg=G
 
 let mapleader=","
 set shell=/bin/bash\ -li
