@@ -21,7 +21,7 @@ Plugin 'tpope/vim-endwise' " adding end after if, do, def and several other keyw
 Plugin 'scrooloose/syntastic' "syntax checker, opts below
 Plugin 'ngmy/vim-rubocop' "Adds a :RuboCop command, which accept rubocop cli args
 Plugin 'rizzatti/dash.vim' " will search for terms using Dash leader+D
-Plugin 'danchoi/ri.vim' " ruby doc
+Plugin 'danchoi/ri.vim' " ruby doc on leader-r
 
 Plugin 'scrooloose/nerdtree' " tree explorer plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin' " plugin of NERDTree showing git status flags
@@ -96,7 +96,7 @@ set cursorline
 set hidden
 set nofoldenable
 "set modelines=0
-" set clipboard=unnamed
+set clipboard=unnamed " Use a system clipboard
 "set synmaxcol=128
 "set ttyscroll=10
 "set encoding=utf-8
@@ -172,6 +172,25 @@ let g:easytags_async = 1
 " Automatically removing all trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
+" function! RuboCopIfAvailable()
+"   :let extension = &ft
+
+"   if extension != "ruby"
+"     return
+"   endif
+
+"   :let rubocop_exists = system("! rubocop_exists " . expand("%"))
+
+"   if rubocop_exists
+"     execute("! rubocop -a " . expand("%") . " &")
+"     " enable if you want to run RuboCop after autocorrect
+"     " on every save
+"     " :RuboCop
+"   endif
+" endfunction
+
+" autocmd BufWritePost * :call RuboCopIfAvailable()
+
 " Enable omni completion.
 " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -187,9 +206,9 @@ let g:buffergator_sort_regime = "mru"
 
 let g:vim_markdown_folding_disabled = 1
 
-let g:syntastic_haml_checkers = ['haml_lint']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_erlang_checkers = ['syntaxerl', 'escript']
+" let g:syntastic_haml_checkers = ['haml_lint']
+let g:syntastic_ruby_checkers = ['rubocop']
+" let g:syntastic_erlang_checkers = ['syntaxerl', 'escript']
 
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -250,12 +269,6 @@ nmap <Leader>p :r ~/.vbuf<CR>
 au BufRead,BufNewFile {Vagrantfile,Gemfile,Capfile} set ft=ruby
 " au BufRead,BufNewFile *.phtml set ft=php
 
-" autocmd FileType ruby compiler ruby
-
-" au FileType ruby setl sw=2 sts=2 et
-" au FileType javascript setl sw=2 sts=2 et
-" au FileType yaml setl sw=2 sts=2 et
-" autocmd Filetype html setlocal ts=2 sw=2
 
 if filereadable(expand("~/.vimrc.after"))
   source ~/.vimrc.after
